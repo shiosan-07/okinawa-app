@@ -10,32 +10,44 @@ body {
   background: linear-gradient(to bottom, #00c6ff, #0072ff);
   color: white;
   text-align: center;
+  margin: 0;
   padding: 20px;
 }
 
 h1 {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 80%;
+  padding: 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  background: white;
+  color: #0072ff;
+  font-weight: bold;
+}
+
+.section {
+  display: none;
 }
 
 .card {
   background: rgba(255,255,255,0.2);
   padding: 15px;
-  border-radius: 15px;
-  margin-bottom: 20px;
-}
-
-button {
-  padding: 10px 20px;
-  border: none;
   border-radius: 20px;
-  background: white;
-  color: #0072ff;
-  font-weight: bold;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .hidden {
   display: none;
+}
+
+.back {
+  background: #ffdd57;
+  color: black;
 }
 </style>
 </head>
@@ -44,53 +56,102 @@ button {
 
 <h1>🌺 沖縄旅行 🌺</h1>
 
-<div class="card">
-<h2>1日目</h2>
+<!-- 🏠 ホーム -->
+<div id="home">
+  <button onclick="showDay(1)">🌴 1日目</button>
+  <button onclick="showDay(2)">🌊 2日目</button>
+  <button onclick="showDay(3)">🐠 3日目</button>
+  <button onclick="showDay(4)">🌅 4日目</button>
+</div>
 
-<label><input type="checkbox" class="day1"> 那覇空港到着</label><br>
-<label><input type="checkbox" class="day1"> レンタカー</label><br>
-<label><input type="checkbox" class="day1"> 国際通り</label><br>
+<!-- 各日程 -->
+<div id="day1" class="section card">
+  <h2>🌴 1日目</h2>
+  <label><input type="checkbox" class="day1"> 那覇空港到着</label><br>
+  <label><input type="checkbox" class="day1"> レンタカー</label><br>
+  <label><input type="checkbox" class="day1"> 国際通り</label><br>
+  <p id="msg1" class="hidden"></p>
+  <button class="back" onclick="goHome()">戻る</button>
+</div>
 
-<p id="message" class="hidden"></p>
+<div id="day2" class="section card">
+  <h2>🌊 2日目</h2>
+  <label><input type="checkbox" class="day2"> 美ら海水族館</label><br>
+  <label><input type="checkbox" class="day2"> 古宇利島</label><br>
+  <p id="msg2" class="hidden"></p>
+  <button class="back" onclick="goHome()">戻る</button>
+</div>
+
+<div id="day3" class="section card">
+  <h2>🐠 3日目</h2>
+  <label><input type="checkbox" class="day3"> 海で遊ぶ</label><br>
+  <label><input type="checkbox" class="day3"> お土産</label><br>
+  <p id="msg3" class="hidden"></p>
+  <button class="back" onclick="goHome()">戻る</button>
+</div>
+
+<div id="day4" class="section card">
+  <h2>🌅 4日目</h2>
+  <label><input type="checkbox" class="day4"> ホテルチェックアウト</label><br>
+  <label><input type="checkbox" class="day4"> 空港へ</label><br>
+  <p id="msg4" class="hidden"></p>
+  <button class="back" onclick="goHome()">戻る</button>
 </div>
 
 <script>
 
-// 保存されたデータを読み込む
-const checkboxes = document.querySelectorAll(".day1");
-
-checkboxes.forEach((checkbox, index) => {
-  const saved = localStorage.getItem("day1_" + index);
-  if (saved === "true") {
-    checkbox.checked = true;
-  }
-
-  checkbox.addEventListener("change", () => {
-    localStorage.setItem("day1_" + index, checkbox.checked);
-    checkCompletion();
-  });
-});
-
-function checkCompletion() {
-  let allChecked = true;
-
-  checkboxes.forEach(box => {
-    if (!box.checked) {
-      allChecked = false;
-    }
-  });
-
-  const message = document.getElementById("message");
-
-  if (allChecked) {
-    message.innerText = "🎉 1日目お疲れ様！！明日も楽しんでね✨";
-    message.classList.remove("hidden");
-  } else {
-    message.classList.add("hidden");
-  }
+// 画面切り替え
+function showDay(num) {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("day" + num).style.display = "block";
 }
 
-checkCompletion();
+function goHome() {
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "none";
+  });
+  document.getElementById("home").style.display = "block";
+}
+
+// チェック保存 & 完了判定
+function setupDay(dayNumber) {
+  const boxes = document.querySelectorAll(".day" + dayNumber);
+  const message = document.getElementById("msg" + dayNumber);
+
+  boxes.forEach((box, index) => {
+    const saved = localStorage.getItem("day" + dayNumber + "_" + index);
+    if (saved === "true") {
+      box.checked = true;
+    }
+
+    box.addEventListener("change", () => {
+      localStorage.setItem("day" + dayNumber + "_" + index, box.checked);
+      checkCompletion();
+    });
+  });
+
+  function checkCompletion() {
+    let allChecked = true;
+    boxes.forEach(b => {
+      if (!b.checked) allChecked = false;
+    });
+
+    if (allChecked) {
+      message.innerText = "🎉 " + dayNumber + "日目お疲れ様！明日も楽しもう🌺";
+      message.classList.remove("hidden");
+    } else {
+      message.classList.add("hidden");
+    }
+  }
+
+  checkCompletion();
+}
+
+// 各日設定
+setupDay(1);
+setupDay(2);
+setupDay(3);
+setupDay(4);
 
 </script>
 

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沖縄旅行🌺</title>
+
+<style>
+body {
+  font-family: sans-serif;
+  background: linear-gradient(to bottom, #00c6ff, #0072ff);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.card {
+  background: rgba(255,255,255,0.2);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: #0072ff;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.hidden {
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🌺 沖縄旅行 🌺</h1>
+
+<div class="card">
+<h2>1日目</h2>
+
+<label><input type="checkbox" class="day1"> 那覇空港到着</label><br>
+<label><input type="checkbox" class="day1"> レンタカー</label><br>
+<label><input type="checkbox" class="day1"> 国際通り</label><br>
+
+<p id="message" class="hidden"></p>
+</div>
+
+<script>
+
+// 保存されたデータを読み込む
+const checkboxes = document.querySelectorAll(".day1");
+
+checkboxes.forEach((checkbox, index) => {
+  const saved = localStorage.getItem("day1_" + index);
+  if (saved === "true") {
+    checkbox.checked = true;
+  }
+
+  checkbox.addEventListener("change", () => {
+    localStorage.setItem("day1_" + index, checkbox.checked);
+    checkCompletion();
+  });
+});
+
+function checkCompletion() {
+  let allChecked = true;
+
+  checkboxes.forEach(box => {
+    if (!box.checked) {
+      allChecked = false;
+    }
+  });
+
+  const message = document.getElementById("message");
+
+  if (allChecked) {
+    message.innerText = "🎉 1日目お疲れ様！！明日も楽しんでね✨";
+    message.classList.remove("hidden");
+  } else {
+    message.classList.add("hidden");
+  }
+}
+
+checkCompletion();
+
+</script>
+
+</body>
+</html>

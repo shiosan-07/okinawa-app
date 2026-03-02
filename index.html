@@ -87,18 +87,20 @@ button {
   width: 24px;   
 }
 
+/* 🎉 コンプリート表示 */
 .celebrate {
   position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 40px;        /* 固定サイズにする */
+  font-size: 6vw;             /* 画面幅に応じて文字サイズ */
+  max-font-size: 40px;        /* 最大サイズ */
   animation: pop 1s ease;
   z-index: 100;
   text-align: center;
-  white-space: nowrap;    /* 折り返さず1行にする */
-  overflow: hidden;       /* はみ出た部分は見えなくする */
-  max-width: 90%;         /* 画面幅を超えないよう制限 */
+  white-space: nowrap;         /* 折り返さず1行 */
+  overflow: hidden;
+  max-width: 90%;              /* 画面幅に収める */
 }
 
 @keyframes pop {
@@ -123,7 +125,6 @@ button {
 <!-- 🕒 スケジュール選択画面 -->
 <div id="scheduleMenu" class="section card">
   <h2>🕒 タイムスケジュール</h2>
-
   <button onclick="showSection('day1')">🌴 1日目</button>
   <button onclick="showSection('day2')">🌊 2日目</button>
   <button onclick="showSection('day3')">🌞 3日目</button>
@@ -185,11 +186,18 @@ function checkAllCompleted() {
     // 背景を水色に
     document.body.classList.add("ocean");
 
-    // 文字出す
+    // 🎉 文字表示（自動縮小して一行に）
     const div = document.createElement("div");
     div.className = "celebrate";
     div.textContent = "🌺 1日目コンプリート！お疲れさま！";
     document.body.appendChild(div);
+
+    // JSで画面幅に収まるよう自動縮小
+    let fontSize = parseInt(window.getComputedStyle(div).fontSize);
+    while (div.scrollWidth > window.innerWidth * 0.9 && fontSize > 10) {
+      fontSize--;
+      div.style.fontSize = fontSize + "px";
+    }
 
     setTimeout(() => div.remove(), 3000); 
     setTimeout(() => document.body.classList.remove("ocean"), 3000); 
@@ -210,6 +218,3 @@ function goHome() {
 
 </body>
 </html>
-
-
-

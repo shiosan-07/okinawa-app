@@ -51,6 +51,30 @@ button {
   background: #ffdd57;
   color: black;
 }
+.schedule {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.schedule li {
+  margin: 6px 0;
+}
+
+.schedule .title {
+  margin: 18px 0 8px 0;   /* ちょっと広めに空ける */
+  font-weight: bold;
+}
+
+.schedule input[type="checkbox"] {
+  transform: scale(1.2);
+  margin-right: 8px;
+}
+
+.schedule input[type="checkbox"]:checked + span {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
 </style>
 </head>
 
@@ -75,40 +99,53 @@ button {
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 
-<!-- 🌴 1日目 -->
 <div id="day1" class="section card">
   <h2>🌴 1日目</h2>
 
-  <ul class="checklist">
-    <li>🚃 あいの風鉄道で小松駅へ出発</li>
+  <ul class="schedule">
+
+    <li class="title">🚃 あいの風鉄道で小松駅へ出発</li>
+
     <li><label><input type="checkbox"><span>10:50 富山駅発</span></label></li>
     <li><label><input type="checkbox"><span>11:00 小杉駅発</span></label></li>
     <li><label><input type="checkbox"><span>11:08 高岡駅発</span></label></li>
     <li><label><input type="checkbox"><span>11:49 金沢駅到着</span></label></li>
     <li><label><input type="checkbox"><span>12:00 金沢駅発</span></label></li>
     <li><label><input type="checkbox"><span>12:34 小松駅到着</span></label></li>
-    <li>👭 徒歩で小松駅前</li>
-    <a href="https://www.google.com/maps/dir/?api=1&destination=小松駅前&travelmode=walking" target="_blank">
-徒歩ルートを見る
-</a>
-    <p>🚌 バスで小松空港へ</p>
+
+    <li class="title">
+      👭 徒歩で小松駅前<br>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=小松駅前&travelmode=walking" target="_blank">
+        徒歩ルートを見る
+      </a>
+    </li>
+
+    <li class="title">🚌 バスで小松空港へ</li>
+
     <li><label><input type="checkbox"><span>13:25 小松駅前発</span></label></li>
     <li><label><input type="checkbox"><span>13:40 小松空港バス停到着</span></label></li>
-    <p>👭 徒歩で小松駅前</p>
-    <a href="https://www.google.com/maps/dir/?api=1&destination=小松空港&travelmode=walking" target="_blank">
-徒歩ルートを見る
-</a>
+
+    <li class="title">
+      👭 徒歩で小松空港へ<br>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=小松空港&travelmode=walking" target="_blank">
+        徒歩ルートを見る
+      </a>
+    </li>
+
     <li><label><input type="checkbox"><span>13:45 小松空港到着</span></label></li>
-    <p>🌺 沖縄へGO!! 🌺</p>
+
+    <li class="title">🌺 沖縄へGO!! 🌺</li>
+
     <li><label><input type="checkbox"><span>14:15 小松空港発</span></label></li>
     <li><label><input type="checkbox"><span>16:55 那覇空港到着 🌴🌺✨</span></label></li>
     <li><label><input type="checkbox"><span>17:45~18:00 無料シャトルで空港からホテルへ</span></label></li>
     <li><label><input type="checkbox"><span>19:00~19:15 無料シャトルで国際通り</span></label></li>
     <li><label><input type="checkbox"><span>国際通り観光🏙</span></label></li>
+
   </ul>
+
   <button class="back" onclick="showSection('scheduleMenu')">戻る</button>
 </div>
-
 <!-- 🌊 2日目 -->
 <div id="day2" class="section card">
   <h2>🌊 2日目</h2>

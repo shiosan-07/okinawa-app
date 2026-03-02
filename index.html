@@ -95,7 +95,9 @@ button {
   font-size: 40px;
   animation: pop 1s ease;
   z-index: 100;
-  white-space: nowrap; /* 1行にまとめる */
+  max-width: 90%;   /* 画面幅の90%以内に制限 */
+  word-wrap: break-word; /* 自動で折り返す */
+  text-align: center;
 }
 
 @keyframes pop {
@@ -207,3 +209,4 @@ function goHome() {
 
 </body>
 </html>
+

@@ -5,9 +5,10 @@
 <title>沖縄旅行🌺</title>
 
 <style>
-  html, body {
+html, body {
   height: 100%;
 }
+
 body {
   font-family: sans-serif;
   background: linear-gradient(to bottom, #00c6ff, #0072ff);
@@ -15,7 +16,7 @@ body {
   text-align: center;
   margin: 0;
   padding: 20px;
-  min-height: 100vh;   /* ← これ追加🔥 */
+  min-height: 100vh;
 }
 
 h1 {
@@ -43,18 +44,17 @@ button {
   padding: 15px;
   border-radius: 20px;
   margin-top: 20px;
-  text-align: left;   /* ← 追加 */
+  text-align: left;
 }
 
-label {
-  display: flex;      /* ← 追加 */
-  align-items: center;
-  gap: 10px;
-  margin: 8px 0;
+a {
+  color: yellow;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-.hidden {
-  display: none;
+a:hover {
+  text-decoration: underline;
 }
 
 .back {
@@ -70,52 +70,77 @@ label {
 
 <!-- 🏠 ホーム -->
 <div id="home">
-  <button onclick="showDay(1)">🌴 1日目</button>
-  <button onclick="showDay(2)">🌊 2日目</button>
-  <button onclick="showDay(3)">🐠 3日目</button>
-  <button onclick="showDay(4)">🌅 4日目</button>
+  <button onclick="showSection('schedule')">🕒 タイムスケジュール</button>
+  <button onclick="showSection('access')">🚗 アクセス</button>
+  <button onclick="showSection('spots')">📍 スポット紹介</button>
 </div>
 
-<!-- 各日程 -->
-<div id="day1" class="section card">
-  <h2>🌴 1日目</h2>
-  <label><input type="checkbox" class="day1"> 那覇空港到着</label><br>
-  <label><input type="checkbox" class="day1"> レンタカー</label><br>
-  <label><input type="checkbox" class="day1"> 国際通り</label><br>
-  <p id="msg1" class="hidden"></p>
+<!-- 🕒 タイムスケジュール -->
+<div id="schedule" class="section card">
+  <h2>🕒 タイムスケジュール</h2>
+
+  <h3>🌴 1日目</h3>
+  <ul>
+    <li>10:00 那覇空港到着</li>
+    <li>12:00 国際通り</li>
+    <li>18:00 ホテルチェックイン</li>
+  </ul>
+
+  <h3>🌊 2日目</h3>
+  <ul>
+    <li>09:00 美ら海水族館</li>
+    <li>15:00 古宇利島</li>
+  </ul>
+
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 
-<div id="day2" class="section card">
-  <h2>🌊 2日目</h2>
-  <label><input type="checkbox" class="day2"> 美ら海水族館</label><br>
-  <label><input type="checkbox" class="day2"> 古宇利島</label><br>
-  <p id="msg2" class="hidden"></p>
+<!-- 🚗 アクセス -->
+<div id="access" class="section card">
+  <h2>🚗 アクセス</h2>
+
+  <p>美ら海水族館までのルート</p>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=美ら海水族館" target="_blank">
+    Googleマップで開く
+  </a>
+
+  <br><br>
+
+  <p>古宇利島までのルート</p>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=古宇利島" target="_blank">
+    Googleマップで開く
+  </a>
+
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 
-<div id="day3" class="section card">
-  <h2>🐠 3日目</h2>
-  <label><input type="checkbox" class="day3"> 海で遊ぶ</label><br>
-  <label><input type="checkbox" class="day3"> お土産</label><br>
-  <p id="msg3" class="hidden"></p>
-  <button class="back" onclick="goHome()">戻る</button>
-</div>
+<!-- 📍 スポット紹介 -->
+<div id="spots" class="section card">
+  <h2>📍 スポット紹介</h2>
 
-<div id="day4" class="section card">
-  <h2>🌅 4日目</h2>
-  <label><input type="checkbox" class="day4"> ホテルチェックアウト</label><br>
-  <label><input type="checkbox" class="day4"> 空港へ</label><br>
-  <p id="msg4" class="hidden"></p>
+  <p>美ら海水族館</p>
+  <a href="https://churaumi.okinawa/" target="_blank">
+    公式サイトを見る
+  </a>
+
+  <br><br>
+
+  <p>古宇利島</p>
+  <a href="https://kourijima.info/" target="_blank">
+    観光情報を見る
+  </a>
+
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 
 <script>
 
-// 画面切り替え
-function showDay(num) {
+function showSection(id) {
   document.getElementById("home").style.display = "none";
-  document.getElementById("day" + num).style.display = "block";
+  document.querySelectorAll(".section").forEach(sec => {
+    sec.style.display = "none";
+  });
+  document.getElementById(id).style.display = "block";
 }
 
 function goHome() {
@@ -125,49 +150,7 @@ function goHome() {
   document.getElementById("home").style.display = "block";
 }
 
-// チェック保存 & 完了判定
-function setupDay(dayNumber) {
-  const boxes = document.querySelectorAll(".day" + dayNumber);
-  const message = document.getElementById("msg" + dayNumber);
-
-  boxes.forEach((box, index) => {
-    const saved = localStorage.getItem("day" + dayNumber + "_" + index);
-    if (saved === "true") {
-      box.checked = true;
-    }
-
-    box.addEventListener("change", () => {
-      localStorage.setItem("day" + dayNumber + "_" + index, box.checked);
-      checkCompletion();
-    });
-  });
-
-  function checkCompletion() {
-    let allChecked = true;
-    boxes.forEach(b => {
-      if (!b.checked) allChecked = false;
-    });
-
-    if (allChecked) {
-      message.innerText = "🎉 " + dayNumber + "日目お疲れ様！明日も楽しもう🌺";
-      message.classList.remove("hidden");
-    } else {
-      message.classList.add("hidden");
-    }
-  }
-
-  checkCompletion();
-}
-
-// 各日設定
-setupDay(1);
-setupDay(2);
-setupDay(3);
-setupDay(4);
-
 </script>
 
 </body>
 </html>
-
-

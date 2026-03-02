@@ -5,10 +5,6 @@
 <title>沖縄旅行🌺</title>
 
 <style>
-html, body {
-  height: 100%;
-}
-
 body {
   font-family: sans-serif;
   background: linear-gradient(to bottom, #00c6ff, #0072ff);
@@ -16,11 +12,6 @@ body {
   text-align: center;
   margin: 0;
   padding: 20px;
-  min-height: 100vh;
-}
-
-h1 {
-  margin-bottom: 20px;
 }
 
 button {
@@ -47,16 +38,6 @@ button {
   text-align: left;
 }
 
-a {
-  color: yellow;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
 .back {
   background: #ffdd57;
   color: black;
@@ -70,35 +51,47 @@ a:hover {
 
 <!-- 🏠 ホーム -->
 <div id="home">
-  <button onclick="showSection('schedule')">🕒 タイムスケジュール</button>
+  <button onclick="showSection('scheduleMenu')">🕒 タイムスケジュール</button>
   <button onclick="showSection('access')">🚗 アクセス</button>
   <button onclick="showSection('spots')">📍 スポット紹介</button>
 </div>
 
-<!-- 🕒 タイムスケジュール -->
-<div id="schedule" class="section card">
+<!-- 🕒 スケジュール選択画面 -->
+<div id="scheduleMenu" class="section card">
   <h2>🕒 タイムスケジュール</h2>
 
-  <h3>🌴 1日目</h3>
+  <button onclick="showSection('day1')">🌴 1日目</button>
+  <button onclick="showSection('day2')">🌊 2日目</button>
+
+  <button class="back" onclick="goHome()">戻る</button>
+</div>
+
+<!-- 🌴 1日目 -->
+<div id="day1" class="section card">
+  <h2>🌴 1日目</h2>
   <ul>
     <li>10:00 那覇空港到着</li>
     <li>12:00 国際通り</li>
     <li>18:00 ホテルチェックイン</li>
   </ul>
 
-  <h3>🌊 2日目</h3>
+  <button class="back" onclick="showSection('scheduleMenu')">戻る</button>
+</div>
+
+<!-- 🌊 2日目 -->
+<div id="day2" class="section card">
+  <h2>🌊 2日目</h2>
   <ul>
     <li>09:00 美ら海水族館</li>
     <li>15:00 古宇利島</li>
   </ul>
 
-  <button class="back" onclick="goHome()">戻る</button>
+  <button class="back" onclick="showSection('scheduleMenu')">戻る</button>
 </div>
 
 <!-- 🚗 アクセス -->
 <div id="access" class="section card">
   <h2>🚗 アクセス</h2>
-
   <p>美ら海水族館までのルート</p>
   <a href="https://www.google.com/maps/dir/?api=1&destination=美ら海水族館" target="_blank">
     Googleマップで開く
@@ -111,6 +104,7 @@ a:hover {
     Googleマップで開く
   </a>
 
+  <br><br>
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 
@@ -130,6 +124,7 @@ a:hover {
     観光情報を見る
   </a>
 
+  <br><br>
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 

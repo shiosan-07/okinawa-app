@@ -95,22 +95,13 @@ button {
   font-size: 40px;
   animation: pop 1s ease;
   z-index: 100;
+  white-space: nowrap; /* 1行にまとめる */
 }
 
 @keyframes pop {
   0% { transform: translate(-50%, -50%) scale(0); }
   60% { transform: translate(-50%, -50%) scale(1.3); }
   100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-/* イルカ */
-#dolphin {
-  position: fixed;
-  top: 70%;
-  left: -150px;
-  width: 120px;
-  transition: all 3s ease-in-out;
-  z-index: 50;
 }
 </style>
 </head>
@@ -136,9 +127,6 @@ button {
   <button onclick="showSection('day4')">🌅 4日目</button>
   <button class="back" onclick="goHome()">戻る</button>
 </div>
-
-<!-- イルカの画像 -->
-<img src="https://i.imgur.com/9YH6vP7.png" id="dolphin" alt="イルカ">
 
 <!-- 🌴 1日目 -->
 <div id="day1" class="section card">
@@ -173,14 +161,10 @@ button {
   <button class="back" onclick="showSection('scheduleMenu')">戻る</button>
 </div>
 
-<!-- 🌊 2日目以降は同じように作れます -->
-
 <script>
-// 🔹チェック保存＋演出
+// チェック保存＋背景＆文字表示
 document.querySelectorAll('input[type="checkbox"]').forEach(box => {
-
   if (localStorage.getItem(box.id) === "true") box.checked = true;
-
   box.addEventListener("change", () => {
     localStorage.setItem(box.id, box.checked);
     checkAllCompleted();
@@ -198,19 +182,14 @@ function checkAllCompleted() {
     // 背景を水色に
     document.body.classList.add("ocean");
 
-    // イルカ泳がせる
-    const dolphin = document.getElementById("dolphin");
-    dolphin.style.left = "80%";
-
     // 文字出す
     const div = document.createElement("div");
     div.className = "celebrate";
-    div.textContent = "🌺 1日目コンプリート！";
+    div.textContent = "🌺 1日目コンプリート！お疲れさま！";
     document.body.appendChild(div);
 
-    setTimeout(() => div.remove(), 3000);
-    setTimeout(() => dolphin.style.left = "-150px", 3500); // イルカ戻す
-    setTimeout(() => document.body.classList.remove("ocean"), 4000); // 背景戻す
+    setTimeout(() => div.remove(), 3000); 
+    setTimeout(() => document.body.classList.remove("ocean"), 3000); 
   }
 }
 
@@ -228,4 +207,3 @@ function goHome() {
 
 </body>
 </html>
-

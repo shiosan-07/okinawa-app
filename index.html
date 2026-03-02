@@ -14,6 +14,7 @@ html, body {
 html {
   background: linear-gradient(to bottom, #00c6ff, #0072ff);
   background-attachment: fixed;
+  transition: background 1s ease;
 }
 
 body {
@@ -21,6 +22,10 @@ body {
   color: white;
   text-align: center;
   padding: 20px;
+}
+
+body.ocean {
+  background: linear-gradient(to bottom, #87cefa, #00bfff);
 }
 
 button {
@@ -52,7 +57,6 @@ button {
   color: black;
 }
 
-/* チェックリスト用 */
 .schedule {
   list-style: none;
   padding: 0;
@@ -64,7 +68,7 @@ button {
 }
 
 .schedule .title {
-  margin: 18px 0 8px 0;
+  margin: 18px 0 8px 0;   
   font-weight: bold;
 }
 
@@ -78,28 +82,35 @@ button {
   opacity: 0.6;
 }
 
-/* 空白用スペース（チェックボックスの位置を揃える） */
 .checkbox-space {
   display: inline-block;
-  width: 24.5px;  /* チェックボックス幅と揃える */
+  width: 26px;   
 }
 
-/* 日ごとの派手なアニメーション */
 .celebrate {
   position: fixed;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 40px;
-  color: #fff;
-  text-shadow: 0 0 10px #000;
   animation: pop 1s ease;
+  z-index: 100;
 }
 
 @keyframes pop {
-  0% { transform: translate(-50%, -50%) scale(0); opacity: 0;}
-  60% { transform: translate(-50%, -50%) scale(1.3); opacity: 1;}
-  100% { transform: translate(-50%, -50%) scale(1); opacity: 1;}
+  0% { transform: translate(-50%, -50%) scale(0); }
+  60% { transform: translate(-50%, -50%) scale(1.3); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* イルカ */
+#dolphin {
+  position: fixed;
+  top: 70%;
+  left: -150px;
+  width: 120px;
+  transition: all 3s ease-in-out;
+  z-index: 50;
 }
 </style>
 </head>
@@ -118,6 +129,7 @@ button {
 <!-- 🕒 スケジュール選択画面 -->
 <div id="scheduleMenu" class="section card">
   <h2>🕒 タイムスケジュール</h2>
+
   <button onclick="showSection('day1')">🌴 1日目</button>
   <button onclick="showSection('day2')">🌊 2日目</button>
   <button onclick="showSection('day3')">🌞 3日目</button>
@@ -125,85 +137,48 @@ button {
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 
+<!-- イルカの画像 -->
+<img src="https://i.imgur.com/9YH6vP7.png" id="dolphin" alt="イルカ">
+
 <!-- 🌴 1日目 -->
 <div id="day1" class="section card">
-<h2>🌴 1日目</h2>
-<ul class="schedule">
+  <h2>🌴 1日目</h2>
 
-  <li class="title">🚃 あいの風鉄道で小松駅へ出発</li>
-
-  <!-- 🔹チェックなしの空白項目 -->
-  <li><span class="checkbox-space"></span><span>10:50 富山駅発</span></li>
-  <li><span class="checkbox-space"></span><span>11:00 小杉駅発</span></li>
-
-  <!-- 🔹チェック項目 -->
-  <li><label><input type="checkbox" id="d1-3"><span>11:08 高岡駅発</span></label></li>
-  <li><label><input type="checkbox" id="d1-4"><span>11:49 金沢駅到着</span></label></li>
-  <li><label><input type="checkbox" id="d1-5"><span>12:00 金沢駅発</span></label></li>
-  <li><label><input type="checkbox" id="d1-6"><span>12:34 小松駅到着</span></label></li>
-
-  <li>👭 徒歩で小松駅前<br>
-      <a href="https://www.google.com/maps/dir/?api=1&destination=小松駅前&travelmode=walking" target="_blank">徒歩ルートを見る</a>
-  </li>
-
-  <li class="title">🚌 バスで小松空港へ</li>
-  <li><label><input type="checkbox" id="d1-7"><span>13:25 小松駅前発</span></label></li>
-  <li><label><input type="checkbox" id="d1-8"><span>13:40 小松空港バス停到着</span></label></li>
-
-  <li>👭 徒歩で小松空港へ<br>
-      <a href="https://www.google.com/maps/dir/?api=1&destination=小松空港&travelmode=walking" target="_blank">徒歩ルートを見る</a>
-  </li>
-
-  <li><label><input type="checkbox" id="d1-9"><span>13:45 小松空港到着</span></label></li>
-
-  <li class="title">🌺 沖縄へGO!! 🌺</li>
-  <li><label><input type="checkbox" id="d1-10"><span>14:15 小松空港発</span></label></li>
-  <li><label><input type="checkbox" id="d1-11"><span>16:55 那覇空港到着 🌴🌺✨</span></label></li>
-  <li><label><input type="checkbox" id="d1-12"><span>17:45~18:00 無料シャトルで空港からホテルへ</span></label></li>
-  <li><label><input type="checkbox" id="d1-13"><span>19:00~19:15 無料シャトルで国際通り</span></label></li>
-  <li><label><input type="checkbox" id="d1-14"><span>国際通り観光🏙</span></label></li>
-</ul>
-
-<button class="back" onclick="showSection('scheduleMenu')">戻る</button>
-</div>
-
-<!-- 🌊 2日目以降は同様の構造 -->
-<div id="day2" class="section card">
-  <h2>🌊 2日目</h2>
-  <ul>
-    <li>09:00 美ら海水族館</li>
-    <li>15:00 古宇利島</li>
+  <ul class="schedule">
+    <li class="title">🚃 あいの風鉄道で小松駅へ出発</li>
+    <li><span class="checkbox-space"></span><span>10:50 富山駅発</span></li>
+    <li><span class="checkbox-space"></span><span>11:00 小杉駅発</span></li>
+    <li><label><input type="checkbox" id="d1-3"><span>11:08 高岡駅発</span></label></li>
+    <li><label><input type="checkbox" id="d1-4"><span>11:49 金沢駅到着</span></label></li>
+    <li><label><input type="checkbox" id="d1-5"><span>12:00 金沢駅発</span></label></li>
+    <li><label><input type="checkbox" id="d1-6"><span>12:34 小松駅到着</span></label></li>
+    <li>👭 徒歩で小松駅前<br>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=小松駅前&travelmode=walking" target="_blank">徒歩ルートを見る</a>
+    </li>
+    <li class="title">🚌 バスで小松空港へ</li>
+    <li><label><input type="checkbox" id="d1-7"><span>13:25 小松駅前発</span></label></li>
+    <li><label><input type="checkbox" id="d1-8"><span>13:40 小松空港バス停到着</span></label></li>
+    <li>👭 徒歩で小松空港へ<br>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=小松空港&travelmode=walking" target="_blank">徒歩ルートを見る</a>
+    </li>
+    <li><label><input type="checkbox" id="d1-9"><span>13:45 小松空港到着</span></label></li>
+    <li class="title">🌺 沖縄へGO!! 🌺</li>
+    <li><label><input type="checkbox" id="d1-10"><span>14:15 小松空港発</span></label></li>
+    <li><label><input type="checkbox" id="d1-11"><span>16:55 那覇空港到着 🌴🌺✨</span></label></li>
+    <li><label><input type="checkbox" id="d1-12"><span>17:45~18:00 無料シャトルで空港からホテルへ</span></label></li>
+    <li><label><input type="checkbox" id="d1-13"><span>19:00~19:15 無料シャトルで国際通り</span></label></li>
+    <li><label><input type="checkbox" id="d1-14"><span>国際通り観光🏙</span></label></li>
   </ul>
+
   <button class="back" onclick="showSection('scheduleMenu')">戻る</button>
 </div>
 
-<!-- 🚗 アクセス -->
-<div id="access" class="section card">
-  <h2>🚗 アクセス</h2>
-  <p>美ら海水族館までのルート</p>
-  <a href="https://www.google.com/maps/dir/?api=1&destination=美ら海水族館" target="_blank">Googleマップで開く</a>
-  <br><br>
-  <p>古宇利島までのルート</p>
-  <a href="https://www.google.com/maps/dir/?api=1&destination=古宇利島" target="_blank">Googleマップで開く</a>
-  <br><br>
-  <button class="back" onclick="goHome()">戻る</button>
-</div>
-
-<!-- 📍 スポット紹介 -->
-<div id="spots" class="section card">
-  <h2>📍 スポット紹介</h2>
-  <p>美ら海水族館</p>
-  <a href="https://churaumi.okinawa/" target="_blank">公式サイトを見る</a>
-  <br><br>
-  <p>古宇利島</p>
-  <a href="https://kourijima.info/" target="_blank">観光情報を見る</a>
-  <br><br>
-  <button class="back" onclick="goHome()">戻る</button>
-</div>
+<!-- 🌊 2日目以降は同じように作れます -->
 
 <script>
-// 🔹チェック保存＆日ごとのコンプリート演出
+// 🔹チェック保存＋演出
 document.querySelectorAll('input[type="checkbox"]').forEach(box => {
+
   if (localStorage.getItem(box.id) === "true") box.checked = true;
 
   box.addEventListener("change", () => {
@@ -213,31 +188,30 @@ document.querySelectorAll('input[type="checkbox"]').forEach(box => {
 });
 
 function checkAllCompleted() {
-  const days = ["day1","day2","day3","day4"];
-  days.forEach(day => {
-    const section = document.getElementById(day);
-    if (!section) return;
+  const day = document.getElementById("day1");
+  const checkboxes = day.querySelectorAll('input[type="checkbox"]');
+  const allChecked = [...checkboxes].every(cb => cb.checked);
 
-    const checkboxes = section.querySelectorAll('input[type="checkbox"]');
-    const allChecked = checkboxes.length > 0 && [...checkboxes].every(cb => cb.checked);
+  if (allChecked && !day.classList.contains("done")) {
+    day.classList.add("done");
 
-    if (allChecked && !section.classList.contains("done")) {
-      section.classList.add("done");
+    // 背景を水色に
+    document.body.classList.add("ocean");
 
-      let message = "";
-      if (day === "day1") message = "🌺 1日目コンプリート！";
-      if (day === "day2") message = "🌊 2日目クリア！";
-      if (day === "day3") message = "🏖 3日目最高！";
-      if (day === "day4") message = "✈ 旅行おつかれさま！";
+    // イルカ泳がせる
+    const dolphin = document.getElementById("dolphin");
+    dolphin.style.left = "80%";
 
-      const div = document.createElement("div");
-      div.className = "celebrate";
-      div.textContent = message;
-      document.body.appendChild(div);
+    // 文字出す
+    const div = document.createElement("div");
+    div.className = "celebrate";
+    div.textContent = "🌺 1日目コンプリート！";
+    document.body.appendChild(div);
 
-      setTimeout(() => div.remove(), 2000);
-    }
-  });
+    setTimeout(() => div.remove(), 3000);
+    setTimeout(() => dolphin.style.left = "-150px", 3500); // イルカ戻す
+    setTimeout(() => document.body.classList.remove("ocean"), 4000); // 背景戻す
+  }
 }
 
 function showSection(id) {
@@ -254,5 +228,3 @@ function goHome() {
 
 </body>
 </html>
-
-

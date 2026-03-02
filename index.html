@@ -75,6 +75,24 @@ button {
   text-decoration: line-through;
   opacity: 0.6;
 }
+.checkbox-space {
+  display: inline-block;
+  width: 26px;   /* チェックボックスと同じ幅 */
+}
+.celebrate {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  animation: pop 1s ease;
+}
+
+@keyframes pop {
+  0% { transform: translate(-50%, -50%) scale(0); }
+  60% { transform: translate(-50%, -50%) scale(1.3); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
 </style>
 </head>
 
@@ -95,57 +113,66 @@ button {
 
   <button onclick="showSection('day1')">🌴 1日目</button>
   <button onclick="showSection('day2')">🌊 2日目</button>
-
+  <button onclick="showSection('day3')">🌞 3日目</button>
+  <button onclick="showSection('day4')">🌅 4日目</button>
   <button class="back" onclick="goHome()">戻る</button>
 </div>
 
 <div id="day1" class="section card">
   <h2>🌴 1日目</h2>
 
-  <ul class="schedule">
+<ul class="schedule">
 
-    <li class="title">🚃 あいの風鉄道で小松駅へ出発</li>
+  <li class="title">🚃 あいの風鉄道で小松駅へ出発</li>
 
-    <li><label><input type="checkbox"><span>10:50 富山駅発</span></label></li>
-    <li><label><input type="checkbox"><span>11:00 小杉駅発</span></label></li>
-    <li><label><input type="checkbox"><span>11:08 高岡駅発</span></label></li>
-    <li><label><input type="checkbox"><span>11:49 金沢駅到着</span></label></li>
-    <li><label><input type="checkbox"><span>12:00 金沢駅発</span></label></li>
-    <li><label><input type="checkbox"><span>12:34 小松駅到着</span></label></li>
+  <!-- 🔹ここ2行は空白にする -->
+  <li>
+    <span class="checkbox-space"></span>
+    <span>10:50 富山駅発</span>
+  </li>
 
-    <li class="title">
-      👭 徒歩で小松駅前<br>
-      <a href="https://www.google.com/maps/dir/?api=1&destination=小松駅前&travelmode=walking" target="_blank">
-        徒歩ルートを見る
-      </a>
-    </li>
+  <li>
+    <span class="checkbox-space"></span>
+    <span>11:00 小杉駅発</span>
+  </li>
 
-    <li class="title">🚌 バスで小松空港へ</li>
+  <li><label><input type="checkbox" id="d1-3"><span>11:08 高岡駅発</span></label></li>
+  <li><label><input type="checkbox" id="d1-4"><span>11:49 金沢駅到着</span></label></li>
+  <li><label><input type="checkbox" id="d1-5"><span>12:00 金沢駅発</span></label></li>
+  <li><label><input type="checkbox" id="d1-6"><span>12:34 小松駅到着</span></label></li>
 
-    <li><label><input type="checkbox"><span>13:25 小松駅前発</span></label></li>
-    <li><label><input type="checkbox"><span>13:40 小松空港バス停到着</span></label></li>
+  <li>
+    👭 徒歩で小松駅前<br>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=小松駅前&travelmode=walking" target="_blank">
+      徒歩ルートを見る
+    </a>
+  </li>
 
-    <li class="title">
-      👭 徒歩で小松空港へ<br>
-      <a href="https://www.google.com/maps/dir/?api=1&destination=小松空港&travelmode=walking" target="_blank">
-        徒歩ルートを見る
-      </a>
-    </li>
+  <li class="title">🚌 バスで小松空港へ</li>
 
-    <li><label><input type="checkbox"><span>13:45 小松空港到着</span></label></li>
+  <li><label><input type="checkbox" id="d1-7"><span>13:25 小松駅前発</span></label></li>
+  <li><label><input type="checkbox" id="d1-8"><span>13:40 小松空港バス停到着</span></label></li>
 
-    <li class="title">🌺 沖縄へGO!! 🌺</li>
+  <li>
+    👭 徒歩で小松空港へ<br>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=小松空港&travelmode=walking" target="_blank">
+      徒歩ルートを見る
+    </a>
+  </li>
 
-    <li><label><input type="checkbox"><span>14:15 小松空港発</span></label></li>
-    <li><label><input type="checkbox"><span>16:55 那覇空港到着 🌴🌺✨</span></label></li>
-    <li><label><input type="checkbox"><span>17:45~18:00 無料シャトルで空港からホテルへ</span></label></li>
-    <li><label><input type="checkbox"><span>19:00~19:15 無料シャトルで国際通り</span></label></li>
-    <li><label><input type="checkbox"><span>国際通り観光🏙</span></label></li>
+  <li><label><input type="checkbox" id="d1-9"><span>13:45 小松空港到着</span></label></li>
 
-  </ul>
+  <li class="title">🌺 沖縄へGO!! 🌺</li>
 
-  <button class="back" onclick="showSection('scheduleMenu')">戻る</button>
-</div>
+  <li><label><input type="checkbox" id="d1-10"><span>14:15 小松空港発</span></label></li>
+  <li><label><input type="checkbox" id="d1-11"><span>16:55 那覇空港到着 🌴🌺✨</span></label></li>
+  <li><label><input type="checkbox" id="d1-12"><span>17:45~18:00 無料シャトルで空港からホテルへ</span></label></li>
+  <li><label><input type="checkbox" id="d1-13"><span>19:00~19:15 無料シャトルで国際通り</span></label></li>
+  <li><label><input type="checkbox" id="d1-14"><span>国際通り観光🏙</span></label></li>
+
+</ul>
+
+<button class="back" onclick="showSection('scheduleMenu')">戻る</button>
 <!-- 🌊 2日目 -->
 <div id="day2" class="section card">
   <h2>🌊 2日目</h2>
@@ -197,7 +224,53 @@ button {
 </div>
 
 <script>
+// 🔹チェック保存
+document.querySelectorAll('input[type="checkbox"]').forEach(box => {
 
+  // 保存されていたら復元
+  if (localStorage.getItem(box.id) === "true") {
+    box.checked = true;
+  }
+
+  // チェック変更時に保存
+  box.addEventListener("change", () => {
+    localStorage.setItem(box.id, box.checked);
+    checkAllCompleted();
+  });
+});
+function checkAllCompleted() {
+
+  const days = ["day1", "day2", "day3", "day4"];
+
+  days.forEach(day => {
+    const section = document.getElementById(day);
+    if (!section) return;
+
+    const checkboxes = section.querySelectorAll('input[type="checkbox"]');
+    const allChecked = [...checkboxes].length > 0 &&
+      [...checkboxes].every(cb => cb.checked);
+
+    if (allChecked && !section.classList.contains("done")) {
+
+      section.classList.add("done");
+
+      let message = "";
+
+      if (day === "day1") message = "🌺 1日目コンプリート！";
+      if (day === "day2") message = "🌊 2日目クリア！";
+      if (day === "day3") message = "🏖 3日目最高！";
+      if (day === "day4") message = "✈ 旅行おつかれさま！";
+
+      const div = document.createElement("div");
+      div.className = "celebrate";
+      div.textContent = message;
+
+      document.body.appendChild(div);
+
+      setTimeout(() => div.remove(), 2000);
+    }
+  });
+}
 function showSection(id) {
   document.getElementById("home").style.display = "none";
   document.querySelectorAll(".section").forEach(sec => {

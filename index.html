@@ -278,7 +278,10 @@ function checkAllCompleted() {
 
       setTimeout(() => div.remove(), 3000);
       setTimeout(() => document.body.classList.remove("ocean"), 3000);
-    }
+    } else if (!allChecked) {
+  // ⭐ これ追加！
+  day.classList.remove("done");
+}
 
   });
 }
